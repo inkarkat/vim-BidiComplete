@@ -52,15 +52,10 @@
 "	   (http://www.lkozma.net/autocomplete.html)
 "
 " REVISION	DATE		REMARKS 
-"	003	15-May-2009	Also define the CTRL-X CTRL-B alternative,
-"				unless that mapping is already taken. Otherwise,
-"				the {rhs} of the <Plug>BidiComplete mapping
-"				would be inserted if one accidentally invoked
-"				the alternative. 
 "	002	15-Aug-2008	Completed implementation. 
 "	001	13-Aug-2008	file creation
 
-" Avoid installing twice or when in unsupported VIM version. 
+" Avoid installing twice or when in unsupported Vim version. 
 if exists('g:loaded_BidiComplete') || (v:version < 700)
     finish
 endif
@@ -106,14 +101,6 @@ endfunction
 inoremap <Plug>BidiComplete <C-o>:set completefunc=<SID>BidiComplete<CR><C-x><C-u>
 if ! hasmapto('<Plug>BidiComplete', 'i')
     imap <C-b> <Plug>BidiComplete
-
-    " Since most completion mappings start with CTRL-X, also define the CTRL-X
-    " CTRL-B alternative, unless that mapping is already taken. Otherwise, the
-    " {rhs} of the <Plug>BidiComplete mapping would be inserted if one
-    " accidentally invoked the alternative. 
-    if empty(maparg('<C-x><C-b>', 'i'))
-	imap <C-x><C-b> <Plug>BidiComplete
-    endif
 endif
 
 " vim: set sts=4 sw=4 noexpandtab ff=unix fdm=syntax :
