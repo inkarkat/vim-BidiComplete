@@ -21,11 +21,15 @@
 "   before and after the cursor, so set your 'iskeyword' option accordingly. 
 "
 " USAGE:
-" i_CTRL-B		Find matches for words that start with the keyword in
+" i_CTRL-X_CTRL-B	Find matches for words that start with the keyword in
 "			front of the cursor and end with the keyword after the
 "			cursor. 
-"   In insert mode, invoke the bidirectional completion via CTRL-B. 
+"   In insert mode, invoke the bidirectional completion via CTRL-X CTRL-B. 
 "   You can then search forward and backward via CTRL-N / CTRL-P, as usual. 
+"
+"   A repetition (via |.|) will only insert the last completed middle part, not
+"   the entire last inserted text. This is a feature; it allows you to quickly
+"   repeat the same completion at other locations. 
 "
 " INSTALLATION:
 " DEPENDENCIES:
@@ -44,7 +48,7 @@
 " KNOWN PROBLEMS:
 " TODO:
 "
-" Copyright: (C) 2008 by Ingo Karkat
+" Copyright: (C) 2008-2009 by Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'. 
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
@@ -52,6 +56,10 @@
 "	   (http://www.lkozma.net/autocomplete.html)
 "
 " REVISION	DATE		REMARKS 
+"	003	10-Jun-2009	Changed default mapping to <C-x><C-b>; this
+"				isn't used enough to warrant such a short
+"				mapping, and it's less mentally taxing because
+"				most completions start with <C-x>. 
 "	002	15-Aug-2008	Completed implementation. 
 "	001	13-Aug-2008	file creation
 
@@ -100,7 +108,7 @@ endfunction
 
 inoremap <Plug>BidiComplete <C-o>:set completefunc=<SID>BidiComplete<CR><C-x><C-u>
 if ! hasmapto('<Plug>BidiComplete', 'i')
-    imap <C-b> <Plug>BidiComplete
+    imap <C-x><C-b> <Plug>BidiComplete
 endif
 
 " vim: set sts=4 sw=4 noexpandtab ff=unix fdm=syntax :
