@@ -21,7 +21,7 @@
 "   before and after the cursor, so set your 'iskeyword' option accordingly. 
 "
 " USAGE:
-" i_CTRL-X_CTRL-B	Find matches for words that start with the keyword in
+" <i_CTRL-X_CTRL-B>	Find matches for words that start with the keyword in
 "			front of the cursor and end with the keyword after the
 "			cursor. 
 "   In insert mode, invoke the bidirectional completion via CTRL-X CTRL-B. 
@@ -38,9 +38,10 @@
 " CONFIGURATION:
 "   Analoguous to the 'complete' option, you can specify which buffers will be
 "   scanned for completion candidates. Currently, only '.' (current buffer) and
-"   'w' (buffers from other windows) are supported. 
-"	g:BidiComplete_complete string (default: ".,w")
-"	b:BidiComplete_complete string
+"   'w' (buffers from other windows) are supported. >
+"	let g:BidiComplete_complete string = '.,w'
+"   The global setting can be overridden for a particular buffer
+"   (b:BidiComplete_complete). 
 "   
 " INTEGRATION:
 " LIMITATIONS:
