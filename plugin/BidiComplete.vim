@@ -49,7 +49,7 @@
 " KNOWN PROBLEMS:
 " TODO:
 "
-" Copyright: (C) 2008-2011 by Ingo Karkat
+" Copyright: (C) 2008-2011 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'. 
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
@@ -108,9 +108,9 @@ function! s:BidiComplete( findstart, base )
     endif
 endfunction
 
-inoremap <silent> <Plug>BidiComplete <C-o>:set completefunc=<SID>BidiComplete<CR><C-x><C-u>
-if ! hasmapto('<Plug>BidiComplete', 'i')
-    imap <C-x><C-b> <Plug>BidiComplete
+inoremap <silent> <Plug>(BidiComplete) <C-o>:set completefunc=<SID>BidiComplete<CR><C-x><C-u>
+if ! hasmapto('<Plug>(BidiComplete)', 'i')
+    imap <C-x><C-b> <Plug>(BidiComplete)
 endif
 
 " vim: set sts=4 sw=4 noexpandtab ff=unix fdm=syntax :
