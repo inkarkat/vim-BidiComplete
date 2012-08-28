@@ -10,9 +10,12 @@
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS 
-"	006	21-Jan-2012	Split off functions into separate autoload
+"	006	22-Jan-2012	Add BidiComplete#GetMatchNum() hook to enable
+"				custom "stop insert mode after completion"
+"				mapping extension. 
+"	005	21-Jan-2012	Split off functions into separate autoload
 "				script. 
-"	005	21-Jan-2012	Using a map-expr instead of i_CTRL-O to set
+"			    	Using a map-expr instead of i_CTRL-O to set
 "				'completefunc', as the temporary leave of insert
 "				mode caused a later repeat via '.' to only
 "				insert the completed fragment, not the entire
@@ -35,6 +38,11 @@ function! s:Process( match )
     return a:match
 endfunction
 
+let s:matchNum = -1
+function! BidiComplete#GetMatchNum()
+    return s:matchNum
+endfunction
+
 function! BidiComplete#BidiComplete( findstart, base )
     if a:findstart
 	" Locate the start of the keyword under cursor. 
@@ -54,6 +62,7 @@ function! BidiComplete#BidiComplete( findstart, base )
 	if ! empty(s:remainder)
 	    call map( l:matches, 's:Process(v:val)' )
 	endif
+	let s:matchNum = len(l:matches)
 	return l:matches
     endif
 endfunction
