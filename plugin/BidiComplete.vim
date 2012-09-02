@@ -1,55 +1,10 @@
 " BidiComplete.vim: Insert mode completion that considers text before AND AFTER
 " the cursor. 
 "
-" DESCRIPTION:
-"   The built-in insert mode completion |i_CTRL-N| searches for words that start
-"   with the keyword in front of the cursor. Any text after the cursor is
-"   ignored. 
-"   So when you want to replace "MyFunnyVariable" with "MySpecialVariable", you
-"   have to delete everything after "My", then start completion, which now also
-"   offers "MySpecialFunction", "MySpecialWhatever", in which you're not
-"   interested in. If you only removed the "Funny" part, the list of
-"   (inapplicable) completions would be the same, and you would finally end up
-"   with "MySpecialVariableVariable", requiring additional edits. 
-"
-"   This plugin offers a custom completion function that considers the text
-"   after the cursor; if there is no keyword immediately after the cursor, it
-"   behaves like the built-in completion. It even works when there is only text
-"   after, but not before the cursor, so completion on "|Variable" yields
-"   "MySpecialVariable", "MyFunnyVariable", etc. 
-"   The base for completion is derived from the string of keyword characters
-"   before and after the cursor, so set your 'iskeyword' option accordingly. 
-"
-" USAGE:
-" <i_CTRL-X_CTRL-B>	Find matches for words that start with the keyword in
-"			front of the cursor and end with the keyword after the
-"			cursor. 
-"   In insert mode, invoke the bidirectional completion via CTRL-X CTRL-B. 
-"   You can then search forward and backward via CTRL-N / CTRL-P, as usual. 
-"
-"   A repetition (via |.|) will only insert the last completed middle part, not
-"   the entire last inserted text. This is a feature; it allows you to quickly
-"   repeat the same completion at other locations. 
-"
-" INSTALLATION:
 " DEPENDENCIES:
-"   - CompleteHelper.vim autoload script. 
+"   - BidiComplete.vim autoload script. 
 "
-" CONFIGURATION:
-"   Analoguous to the 'complete' option, you can specify which buffers will be
-"   scanned for completion candidates. Currently, only '.' (current buffer) and
-"   'w' (buffers from other windows) are supported. >
-"	let g:BidiComplete_complete string = '.,w'
-"   The global setting can be overridden for a particular buffer
-"   (b:BidiComplete_complete). 
-"   
-" INTEGRATION:
-" LIMITATIONS:
-" ASSUMPTIONS:
-" KNOWN PROBLEMS:
-" TODO:
-"
-" Copyright: (C) 2008-2011 Ingo Karkat
+" Copyright: (C) 2008-2012 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'. 
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
@@ -57,6 +12,19 @@
 "	   (http://www.lkozma.net/autocomplete.html)
 "
 " REVISION	DATE		REMARKS 
+"	005	21-Jan-2012	Split off functions into separate autoload
+"				script and documentation into dedicated help
+"				file. 
+"			    	Using a map-expr instead of i_CTRL-O to set
+"				'completefunc', as the temporary leave of insert
+"				mode caused a later repeat via '.' to only
+"				insert the completed fragment, not the entire
+"				inserted text. (Which in this completion mostly
+"				is the completion base + completed fragment,
+"				anyway, since more text than the completion base
+"				is seldomly inserted beforehand, as text
+"				insertion is left-to-right, but completion is
+"				right-to-left.) 
 "	004	30-Sep-2011	Add <silent> to <Plug>-mapping. 
 "	003	10-Jun-2009	Changed default mapping to <C-x><C-b>; this
 "				isn't used enough to warrant such a short
@@ -71,44 +39,17 @@ if exists('g:loaded_BidiComplete') || (v:version < 700)
 endif
 let g:loaded_BidiComplete = 1
 
+"- configuration ---------------------------------------------------------------
+
 if ! exists('g:BidiComplete_complete')
     let g:BidiComplete_complete = '.,w'
 endif
 
-function! s:GetCompleteOption()
-    return (exists('b:BidiComplete_complete') ? b:BidiComplete_complete : g:BidiComplete_complete)
-endfunction
 
-function! s:Process( match )
-    let a:match.abbr = a:match.word
-    let a:match.word = strpart( a:match.word, 0, len( a:match.word) - len(s:remainder) )
-    return a:match
-endfunction
 
-function! s:BidiComplete( findstart, base )
-    if a:findstart
-	" Locate the start of the keyword under cursor. 
-	let l:startCol = searchpos('\k*\%#', 'bn', line('.'))[1]
-	if l:startCol == 0
-	    let l:startCol = col('.')
-	endif
-	
-	" Remember any remainder of the keyword under cursor.  
-	let s:remainder = matchstr( getline('.'), '^\k*', col('.') - 1 )
+"- mappings --------------------------------------------------------------------
 
-	return l:startCol - 1 " Return byte index, not column. 
-    else
-	" Find keyword matches starting with a:base and ending in s:remainder. 
-	let l:matches = []
-	call CompleteHelper#FindMatches( l:matches, '\V\<' . escape(a:base, '\') . '\k\+' . escape(s:remainder, '\') . '\>' , {'complete': s:GetCompleteOption()} )
-	if ! empty(s:remainder)
-	    call map( l:matches, 's:Process(v:val)' )
-	endif
-	return l:matches
-    endif
-endfunction
-
-inoremap <silent> <Plug>(BidiComplete) <C-o>:set completefunc=<SID>BidiComplete<CR><C-x><C-u>
+inoremap <silent> <expr> <Plug>(BidiComplete) BidiComplete#Expr()
 if ! hasmapto('<Plug>(BidiComplete)', 'i')
     imap <C-x><C-b> <Plug>(BidiComplete)
 endif
