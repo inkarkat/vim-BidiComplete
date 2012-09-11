@@ -38,7 +38,7 @@ Original idea by Laszlo Kozma in his paper "Reverse autocomplete"
 
 SEE ALSO								     *
 
-- Check out the CompleteHelper.vim plugin page (vimscript #3914) for a full
+- Check out the |CompleteHelper.vim| plugin page (vimscript #3914) for a full
   list of insert mode completions powered by it.
 
 RELATED WORKS								     *
@@ -67,7 +67,7 @@ To uninstall, use the |:RmVimball| command.
 DEPENDENCIES					   *BidiComplete-dependencies*
 
 - Requires Vim 7.0 or higher.
-- Requires the CompleteHelper.vim plugin (vimscript #3914).
+- Requires the |CompleteHelper.vim| plugin (vimscript #3914).
 
 ==============================================================================
 CONFIGURATION					  *BidiComplete-configuration*
