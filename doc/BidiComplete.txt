@@ -45,22 +45,23 @@ RELATED WORKS								     *
 
 ==============================================================================
 USAGE							  *BidiComplete-usage*
+
+In insert mode, invoke the bidirectional completion via CTRL-X CTRL-B.
+You can then search forward and backward via CTRL-N / CTRL-P, as usual.
+
 							     *i_CTRL-X_CTRL-B*
 CTRL-X CTRL-B		Find matches for words that start with the keyword in
 			front of the cursor and end with the keyword after the
 			cursor.
-			In insert mode, invoke the bidirectional completion
-			via CTRL-X CTRL-B. You can then search forward and
-			backward via CTRL-N / CTRL-P, as usual.
 
 ==============================================================================
 INSTALLATION					   *BidiComplete-installation*
 
 This script is packaged as a |vimball|. If you have the "gunzip" decompressor
-in your PATH, simply edit the *.vba.gz package in Vim; otherwise, decompress
+in your PATH, simply edit the *.vmb.gz package in Vim; otherwise, decompress
 the archive first, e.g. using WinZip. Inside Vim, install by sourcing the
 vimball or via the |:UseVimball| command. >
-    vim BidiComplete.vba.gz
+    vim BidiComplete*.vmb.gz
     :so %
 To uninstall, use the |:RmVimball| command.
 
@@ -76,9 +77,9 @@ For a permanent configuration, put the following commands into your |vimrc|:
 
 			   *b:BidiComplete_complete* *g:BidiComplete_complete*
 Analoguous to the 'complete' option, you can specify which buffers will be
-scanned for completion candidates. Currently, only '.' (current buffer) and
-'w' (buffers from other windows) are supported. >
-    let g:BidiComplete_complete = '.,w'
+scanned for completion candidates. Currently, '.' (current buffer), 'w'
+(buffers from other windows), and 'b' (other listed buffers) are supported. >
+    let g:BidiComplete_complete = '.,w,b'
 The global setting can be overridden for a particular buffer
 (b:BidiComplete_complete).
 
