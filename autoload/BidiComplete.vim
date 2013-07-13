@@ -3,7 +3,7 @@
 "
 " DEPENDENCIES:
 "   - CompleteHelper.vim autoload script.
-"   - ingocollections.vim autoload script
+"   - ingo/collections.vim autoload script
 "
 " Copyright: (C) 2008-2012 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
@@ -11,6 +11,7 @@
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
+"	008	21-Feb-2013	Move to ingo-library.
 "	007	29-Aug-2012	The number returned by
 "				BidiComplete#GetMatchNum() may be too large when
 "				the same match is found in multiple buffers.
@@ -72,7 +73,7 @@ function! BidiComplete#BidiComplete( findstart, base )
 	" We may have found the same match in multiple buffers. Vim
 	" automatically consolidates those in the completion, but for counting,
 	" we have to do this ourselves.
-	let s:matchNum = len(ingocollections#unique(map(copy(l:matches), 'v:val.word')))
+	let s:matchNum = len(ingo#collections#Unique(map(copy(l:matches), 'v:val.word')))
 
 	return l:matches
     endif
