@@ -2,16 +2,16 @@
 " the cursor.
 "
 " DEPENDENCIES:
-"   - CompleteHelper.vim autoload script.
+"   - CompleteHelper.vim autoload script
 "   - ingo/collections.vim autoload script
 "
-" Copyright: (C) 2008-2012 Ingo Karkat
+" Copyright: (C) 2008-2013 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
-"	008	21-Feb-2013	Move to ingo-library.
+"   1.00.008	21-Feb-2013	Move to ingo-library.
 "	007	29-Aug-2012	The number returned by
 "				BidiComplete#GetMatchNum() may be too large when
 "				the same match is found in multiple buffers.
