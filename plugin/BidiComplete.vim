@@ -2,9 +2,9 @@
 " the cursor.
 "
 " DEPENDENCIES:
-"   - BidiComplete.vim autoload script.
+"   - BidiComplete.vim autoload script
 "
-" Copyright: (C) 2008-2012 Ingo Karkat
+" Copyright: (C) 2008-2013 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
@@ -12,7 +12,7 @@
 "	   (http://www.lkozma.net/autocomplete.html)
 "
 " REVISION	DATE		REMARKS
-"	006	03-Sep-2012	Add value "b" (other listed buffers) to the
+"   1.00.006	03-Sep-2012	Add value "b" (other listed buffers) to the
 "				plugin's 'complete' option offered by
 "				CompleteHelper.vim 1.20.
 "	005	21-Jan-2012	Split off functions into separate autoload
@@ -47,7 +47,6 @@ let g:loaded_BidiComplete = 1
 if ! exists('g:BidiComplete_complete')
     let g:BidiComplete_complete = '.,w,b'
 endif
-
 
 
 "- mappings --------------------------------------------------------------------
