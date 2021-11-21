@@ -1,0 +1,44 @@
+Here's some text. 
+myAA
+myBB
+What can be said about myAA?
+myCC
+free for far foo foobar FOO lala hehe foxy fox
+08/15 47\11 /hehe/ \huhu\
+myDD
+myEE
+
+this foobar bar
+the fr
+
+an =
+an =     x
+an f
+an f     x
+an fo
+an fo    x
+
+         y
+myXX
+myYY
+myZZ
+
+IndentConsistencyCop
+IndentCollaborationCop
+IndentCheckCop
+IndentSyntaxCop
+IndentMasterCode
+InternationalCollaborationCop
+InsideCoreCode
+Indentconsistencycop
+
+IndentCop
+InCop
+InCode
+InCo
+
+Cop
+cyCop
+ConsistencyCop
+it's t
+
