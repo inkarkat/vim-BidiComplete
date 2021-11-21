@@ -1,16 +1,19 @@
-" BidiComplete.vim: Insert mode completion that considers text before AND AFTER
-" the cursor.
+" BidiComplete.vim: Insert mode completion that considers text before AND AFTER the cursor.
 "
 " DEPENDENCIES:
 "   - CompleteHelper.vim autoload script
 "   - ingo/collections.vim autoload script
+"   - ingo/plugin/setting.vim autoload script
 "
-" Copyright: (C) 2008-2013 Ingo Karkat
+" Copyright: (C) 2008-2015 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
+"   1.02.010	12-Jan-2015	Remove default g:BidiComplete_complete
+"				configuration and default to 'complete' option
+"				value instead.
 "   1.01.009	15-Jul-2013	Tweak base algorithm: Enforce base after cursor
 "				(without it, the completion would be just like
 "				the default one), also take non-keyword
@@ -42,7 +45,7 @@
 "	001	13-Aug-2008	file creation
 
 function! s:GetCompleteOption()
-    return (exists('b:BidiComplete_complete') ? b:BidiComplete_complete : g:BidiComplete_complete)
+    return ingo#plugin#setting#GetBufferLocal('BidiComplete_complete', &complete)
 endfunction
 
 function! s:Process( match )
