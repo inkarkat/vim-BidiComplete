@@ -84,9 +84,9 @@ To uninstall, use the |:RmVimball| command.
 DEPENDENCIES					   *BidiComplete-dependencies*
 
 - Requires Vim 7.0 or higher.
-- Requires the |CompleteHelper.vim| plugin (vimscript #3914).
 - Requires the |ingo-library.vim| plugin (vimscript #4433), version 1.010 or
   higher.
+- Requires the |CompleteHelper.vim| plugin (vimscript #3914).
 
 ==============================================================================
 CONFIGURATION					  *BidiComplete-configuration*
@@ -94,12 +94,12 @@ CONFIGURATION					  *BidiComplete-configuration*
 For a permanent configuration, put the following commands into your |vimrc|:
 
 			   *b:BidiComplete_complete* *g:BidiComplete_complete*
-Analoguous to the 'complete' option, you can specify which buffers will be
-scanned for completion candidates. Currently, '.' (current buffer), 'w'
-(buffers from other windows), and 'b' (other listed buffers) are supported. >
-    let g:BidiComplete_complete = '.,w,b'
-The global setting can be overridden for a particular buffer
-(b:BidiComplete_complete).
+By default, the 'complete' option controls which buffers will be scanned for
+completion candidates. You can override that either for the entire plugin, or
+only for particular buffers; see |CompleteHelper_complete| for supported
+values. >
+    let g:BidiComplete_complete = '.,w,b,u'
+<
 							  *BidiComplete-remap*
 If you want to use a different mapping, map your keys to the
 <Plug>(BidiComplete) mapping target _before_ sourcing the script (e.g.
@@ -118,6 +118,10 @@ IDEAS							  *BidiComplete-ideas*
 ==============================================================================
 HISTORY							*BidiComplete-history*
 
+1.02	RELEASEME
+- Remove default g:BidiComplete_complete configuration and default to
+  'complete' option value instead.
+
 1.01	15-Jul-2013
 Tweak base algorithm: Enforce base after cursor (without it, the completion
 would be just like the default one), also take non-keyword non-whitespace
@@ -131,7 +135,7 @@ First published version.
 Started development.
 
 ==============================================================================
-Copyright: (C) 2008-2013 Ingo Karkat
+Copyright: (C) 2008-2015 Ingo Karkat
 The VIM LICENSE applies to this plugin; see |copyright|.
 
 Maintainer:	Ingo Karkat <ingo@karkat.de>
